@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://drg8h55nfhyco"]
+
+[ext_resource type="Script" uid="uid://cpqkitnj6h8qr" path="res://Player/player_controller.gd" id="1_l8h54"]
+[ext_resource type="Script" uid="uid://y7jejvf0kmvf" path="res://Player/camera_spring_arm_3d.gd" id="2_4ntmi"]
+[ext_resource type="Script" uid="uid://bhsu7uhrk4k2n" path="res://Player/player_visual.gd" id="2_gwnis"]
+[ext_resource type="Script" uid="uid://dbegu7u5md4r1" path="res://Player/camera_follow.gd" id="3_btcbx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btcbx"]
+albedo_color = Color(1, 0.428403, 0.416313, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwnis"]
+albedo_color = Color(0.151276, 0.151276, 0.151276, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_btcbx"]
+radius = 0.3
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_l8h54")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_hvfyp")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1.00355, 0, 0, 0, 1.00355, 0, 0, 0, 1.00355, 0, 0, 0)
+material = SubResource("StandardMaterial3D_btcbx")
+script = ExtResource("2_gwnis")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.685225, -0.346436)
+size = Vector3(0.75, 0.3, 0.5)
+material = SubResource("StandardMaterial3D_gwnis")
+
+[node name="SpringArmPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.508204, 0)
+top_level = true
+script = ExtResource("2_4ntmi")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot"]
+shape = SubResource("SphereShape3D_btcbx")
+
+[node name="SpringPosition" type="Node3D" parent="SpringArmPivot/SpringArm3D"]
+
+[node name="Camera3D" type="Camera3D" parent="SpringArmPivot" node_paths=PackedStringArray("spring_arm")]
+script = ExtResource("3_btcbx")
+spring_arm = NodePath("../SpringArm3D/SpringPosition")

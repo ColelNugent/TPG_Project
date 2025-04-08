@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cevx20u0mfgoa"
+path="res://.godot/imported/Skyrim - Far Horizons (8-Bit).mp3-b56b0d18155ae82af6da723447a46fc7.mp3str"
+
+[deps]
+
+source_file="res://Music/Ambience/Skyrim - Far Horizons (8-Bit).mp3"
+dest_files=["res://.godot/imported/Skyrim - Far Horizons (8-Bit).mp3-b56b0d18155ae82af6da723447a46fc7.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

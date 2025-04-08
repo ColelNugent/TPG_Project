@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bopdd1w4n5np1"]
+[gd_scene load_steps=8 format=3 uid="uid://bopdd1w4n5np1"]
 
 [ext_resource type="PackedScene" uid="uid://drg8h55nfhyco" path="res://Player/player.tscn" id="1_a02cp"]
+[ext_resource type="PackedScene" uid="uid://dsb0lketn5gcy" path="res://UI/InGame/in_game_ui.tscn" id="2_go701"]
+[ext_resource type="PackedScene" uid="uid://bvdvc5fx0gp6r" path="res://Buildings/broken_tower.tscn" id="3_5a7ea"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_go701"]
+sky_top_color = Color(0.367451, 0.562405, 1, 1)
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 
@@ -30,18 +33,52 @@ environment = SubResource("Environment_8j60k")
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1.00109, 0, 0, 0, 1.00109, 0, 0, 0, 1.00109, 0, -0.5, 0)
 use_collision = true
-size = Vector3(35, 1, 35)
+size = Vector3(100, 1, 100)
 material = SubResource("StandardMaterial3D_a02cp")
 
 [node name="Player" parent="." instance=ExtResource("1_a02cp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="In-Game UI" parent="Control" instance=ExtResource("2_go701")]
+layout_mode = 1
+
+[node name="BrokenTower" parent="." instance=ExtResource("3_5a7ea")]
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, -15.9263, 0, -1.45556)
+
+[node name="placed" type="Node3D" parent="."]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="placed"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.45853)
 use_collision = true
 size = Vector3(5, 4, 1)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+[node name="CSGBox3D3" type="CSGBox3D" parent="placed"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.01585, 0, 8.42242)
 use_collision = true
 size = Vector3(5, 4, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="placed"]
+transform = Transform3D(-4.35874e-08, 0, 0.997162, 0, 0.997162, 0, -0.997162, 0, -4.35874e-08, 3.71931, 0, 3.38369)
+use_collision = true
+size = Vector3(2.5, 2, 2.5)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="placed"]
+transform = Transform3D(-4.35874e-08, 0, 0.997162, 0, 0.997162, 0, -0.997162, 0, -4.35874e-08, 3.71931, 0.701549, 6.79446)
+use_collision = true
+size = Vector3(2.5, 2, 2.5)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="placed"]
+transform = Transform3D(-4.35874e-08, 0, 0.997162, 0, 0.997162, 0, -0.997162, 0, -4.35874e-08, 3.736, 0.325332, 9.71924)
+use_collision = true
+size = Vector3(2.5, 4, 2.5)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="placed"]
+transform = Transform3D(-6.90325, 0, -2.45516e-07, 0, 1.71382, 0, 6.03501e-07, 0, -2.80838, 10.7849, -0.0501156, -4.32398)
+use_collision = true
+polygon = PackedVector2Array(0, 0, 0, 1, 1, 0)

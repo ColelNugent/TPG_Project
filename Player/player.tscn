@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://drg8h55nfhyco"]
+[gd_scene load_steps=11 format=3 uid="uid://drg8h55nfhyco"]
 
 [ext_resource type="Script" uid="uid://cpqkitnj6h8qr" path="res://Player/player_controller.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://y7jejvf0kmvf" path="res://Player/camera_spring_arm_3d.gd" id="2_4ntmi"]
@@ -15,6 +15,12 @@ albedo_color = Color(0.859596, 0.581995, 0.453719, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gwnis"]
 material = SubResource("StandardMaterial3D_gwnis")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k53q1"]
+albedo_color = Color(0.0923971, 0.0923971, 0.0923971, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fhl08"]
+albedo_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_l8h54")
@@ -43,3 +49,15 @@ script = ExtResource("2_gwnis")
 [node name="CSGBox3D" type="CSGBox3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.472437, -0.290634)
 size = Vector3(0.75, 0.25, 0.5)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.101438, 0)
+radius = 0.52
+height = 0.75
+sides = 14
+material = SubResource("StandardMaterial3D_k53q1")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.549517, 0)
+radius = 0.52
+material = SubResource("StandardMaterial3D_fhl08")

@@ -7,30 +7,20 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btcbx"]
-albedo_color = Color(1, 0.428403, 0.416313, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwnis"]
-albedo_color = Color(0.151276, 0.151276, 0.151276, 1)
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_btcbx"]
 radius = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwnis"]
+albedo_color = Color(0.859596, 0.581995, 0.453719, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gwnis"]
+material = SubResource("StandardMaterial3D_gwnis")
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_l8h54")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_hvfyp")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1.00355, 0, 0, 0, 1.00355, 0, 0, 0, 1.00355, 0, 0, 0)
-material = SubResource("StandardMaterial3D_btcbx")
-script = ExtResource("2_gwnis")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCylinder3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.685225, -0.346436)
-size = Vector3(0.75, 0.3, 0.5)
-material = SubResource("StandardMaterial3D_gwnis")
 
 [node name="SpringArmPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.508204, 0)
@@ -45,3 +35,11 @@ shape = SubResource("SphereShape3D_btcbx")
 [node name="Camera3D" type="Camera3D" parent="SpringArmPivot" node_paths=PackedStringArray("spring_arm")]
 script = ExtResource("3_btcbx")
 spring_arm = NodePath("../SpringArm3D/SpringPosition")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_gwnis")
+script = ExtResource("2_gwnis")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.472437, -0.290634)
+size = Vector3(0.75, 0.25, 0.5)

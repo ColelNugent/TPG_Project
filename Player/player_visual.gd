@@ -1,4 +1,4 @@
-extends CSGCylinder3D
+extends MeshInstance3D
 
 @export var rotate_rate : float = 20.0
 var target_y_rot : float = 0.0

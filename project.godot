@@ -15,6 +15,12 @@ run/main_scene="uid://bopdd1w4n5np1"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://d2snpotcyv2re"
 
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="thirdpersongame"

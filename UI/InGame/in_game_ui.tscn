@@ -1,7 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dsb0lketn5gcy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c1t8s"]
-font_size = 12
 
 [node name="In-Game UI" type="Control"]
 layout_mode = 3
@@ -15,6 +14,6 @@ grow_vertical = 2
 layout_mode = 0
 offset_right = 236.0
 offset_bottom = 71.0
-text = "Alpha ver 0.0.123
+text = "Alpha ver 0.0.13
 Tab - unlocks mouse"
 label_settings = SubResource("LabelSettings_c1t8s")

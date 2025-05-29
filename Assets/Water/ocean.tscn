@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b251nrlbfu6s1"]
+
+[ext_resource type="Material" uid="uid://fpfebbtx05vd" path="res://Assets/Materials/ocean_water.tres" id="1_4464t"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5ywlw"]
+material = ExtResource("1_4464t")
+size = Vector2(5000, 5000)
+
+[node name="Ocean" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41254, 0.0294533, 0.333265)
+mesh = SubResource("PlaneMesh_5ywlw")

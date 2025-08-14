@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b5aau8lpamefy"]
 
-[ext_resource type="AudioStream" uid="uid://cevx20u0mfgoa" path="res://Music/Ambience/Skyrim - Far Horizons (8-Bit).mp3" id="1_pqams"]
+[ext_resource type="AudioStream" uid="uid://dcvt6ji3oouw7" path="res://Music/Ambience/majesticforestaudio.mp3" id="1_pqams"]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer"]
 stream = ExtResource("1_pqams")

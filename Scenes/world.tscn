@@ -1,15 +1,19 @@
-[gd_scene load_steps=24 format=3 uid="uid://bopdd1w4n5np1"]
+[gd_scene load_steps=30 format=3 uid="uid://bopdd1w4n5np1"]
 
-[ext_resource type="PackedScene" uid="uid://nbbjg5x6bo2h" path="res://Player/player.tscn" id="1_a02cp"]
 [ext_resource type="PackedScene" uid="uid://dsb0lketn5gcy" path="res://UI/InGame/in_game_ui.tscn" id="2_go701"]
 [ext_resource type="PackedScene" uid="uid://b5aau8lpamefy" path="res://Music/Ambience/ambient_music_player.tscn" id="4_8j60k"]
-[ext_resource type="Texture2D" uid="uid://cxc6k3sh24e15" path="res://Assets/Textures/Ground/ground.png" id="4_fo5ed"]
-[ext_resource type="Texture2D" uid="uid://c4555x63yqab" path="res://Assets/Textures/Ground/ground_n.png" id="5_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://bhxx3kqc7323p" path="res://Assets/Trees/tree_1.tscn" id="5_k7acu"]
-[ext_resource type="PackedScene" uid="uid://c17fqyh6agw4j" path="res://Assets/Misc/campfire_1.tscn" id="8_5v1tr"]
+[ext_resource type="Texture2D" uid="uid://sed8lcfqlnsi" path="res://Assets/Textures/Ground/ground037_alb_ht.png" id="6_7yui6"]
+[ext_resource type="Texture2D" uid="uid://lg6xikpo0tgu" path="res://Assets/Textures/Ground/rock045_alb_ht.png" id="6_c5t2i"]
+[ext_resource type="Texture2D" uid="uid://crecd1wy7e0oa" path="res://Assets/Textures/Ground/ground037_nrm_rgh.png" id="7_c5t2i"]
+[ext_resource type="Texture2D" uid="uid://d02vau7wlulul" path="res://Assets/Textures/Ground/rock045_nrm_rgh.png" id="7_e0ngr"]
+[ext_resource type="Texture2D" uid="uid://b8fucye6o33av" path="res://Assets/Textures/Ground/ground073_alb_ht.png" id="8_e0ngr"]
 [ext_resource type="PackedScene" uid="uid://cchmxik4l1qgg" path="res://Assets/Misc/tower_test.tscn" id="9_5v1tr"]
+[ext_resource type="Texture2D" uid="uid://cv2rf52dhpfny" path="res://Assets/Textures/Ground/ground073_nrm_rgh.png" id="9_kn0ld"]
 [ext_resource type="PackedScene" uid="uid://b251nrlbfu6s1" path="res://Assets/Water/ocean.tscn" id="11_ikia7"]
 [ext_resource type="Texture2D" uid="uid://p75aqbdkbncs" path="res://Assets/Textures/Misc/TPG_MAP.jpg" id="12_7yui6"]
+[ext_resource type="PackedScene" uid="uid://c17fqyh6agw4j" path="res://Assets/Misc/Campfires/campfire_1.tscn" id="13_e0ngr"]
+[ext_resource type="PackedScene" uid="uid://bphhyapavuiiu" path="res://Player/player.tscn" id="14_e0ngr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fo5ed"]
 sky_top_color = Color(0.567622, 0.708996, 1, 1)
@@ -22,8 +26,8 @@ background_mode = 2
 sky = SubResource("Sky_5ukr8")
 tonemap_mode = 2
 glow_enabled = true
-fog_light_color = Color(0.130178, 0.145316, 0.169114, 1)
-fog_density = 0.04
+fog_enabled = true
+fog_density = 0.001
 fog_sky_affect = 0.85
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5t2i"]
@@ -97,19 +101,34 @@ last_shadow_lod = 0
 lod0_range = 128.0
 
 [sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_o06y3"]
-name = "ground"
-albedo_texture = ExtResource("4_fo5ed")
-normal_texture = ExtResource("5_5ukr8")
-uv_scale = 0.5
+name = "ground037_alb_ht"
+albedo_texture = ExtResource("6_7yui6")
+normal_texture = ExtResource("7_c5t2i")
+roughness = 0.198
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_kn0ld"]
+name = "rock045_alb_ht"
+id = 1
+albedo_texture = ExtResource("6_c5t2i")
+normal_texture = ExtResource("7_e0ngr")
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_hgpy0"]
+name = "ground073_alb_ht"
+id = 2
+albedo_texture = ExtResource("8_e0ngr")
+normal_texture = ExtResource("9_kn0ld")
+roughness = 0.18
 
 [sub_resource type="Terrain3DAssets" id="Terrain3DAssets_c5t2i"]
 mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_0fj1v")])
-texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_o06y3")])
+texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_o06y3"), SubResource("Terrain3DTextureAsset_kn0ld"), SubResource("Terrain3DTextureAsset_hgpy0")])
 
 [node name="World" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.248224, -0.465331, -0.849618, 0.965017, 0.195218, 0.175019, 0.0844193, -0.86334, 0.497511, 0, 0, 0)
+light_color = Color(0.915831, 0.464031, 2.11775e-06, 1)
+shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8j60k")
@@ -121,7 +140,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="In-Game UI" parent="Control" instance=ExtResource("2_go701")]
-layout_mode = 1
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource("4_8j60k")]
 
@@ -144,8 +162,8 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.121
 [node name="Ocean" parent="The Ocean" instance=ExtResource("11_ikia7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -243.706)
 
-[node name="campfire2" parent="." instance=ExtResource("8_5v1tr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -2.65097)
+[node name="Ocean2" parent="The Ocean" instance=ExtResource("11_ikia7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000437118, 2, 4756.29)
 
 [node name="Trees" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.1139, 0, 0)
@@ -207,6 +225,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.5256, 4, -333.22)
 [node name="tree30" parent="Trees" instance=ExtResource("5_k7acu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74.4696, 4, -339.144)
 
+[node name="tree31" parent="Trees" instance=ExtResource("5_k7acu")]
+transform = Transform3D(0.596925, 0, -0.802297, 0, 1, 0, 0.802297, 0, 0.596925, -74.1239, 4.3112, -369.699)
+
+[node name="tree32" parent="Trees" instance=ExtResource("5_k7acu")]
+transform = Transform3D(0.596925, 0, -0.802297, 0, 1, 0, 0.802297, 0, 0.596925, -65.48, 4.3112, -369.411)
+
+[node name="tree33" parent="Trees" instance=ExtResource("5_k7acu")]
+transform = Transform3D(0.596925, 0, -0.802297, 0, 1, 0, 0.802297, 0, 0.596925, -70.786, 4.3112, -381.573)
+
+[node name="tree34" parent="Trees" instance=ExtResource("5_k7acu")]
+transform = Transform3D(0.596925, 0, -0.802297, 0, 1, 0, 0.802297, 0, 0.596925, -61.8881, 4, -379.538)
+
+[node name="tree35" parent="Trees" instance=ExtResource("5_k7acu")]
+transform = Transform3D(-0.251934, 0, -0.967744, 0, 1, 0, 0.967744, 0, -0.251934, -258.123, 4.3112, -460.71)
+
+[node name="tree36" parent="Trees" instance=ExtResource("5_k7acu")]
+transform = Transform3D(-0.251934, 0, -0.967744, 0, 1, 0, 0.967744, 0, -0.251934, -245.631, 4.3112, -453.789)
+
+[node name="tree37" parent="Trees" instance=ExtResource("5_k7acu")]
+transform = Transform3D(-0.251934, 0, -0.967744, 0, 1, 0, 0.967744, 0, -0.251934, -239.469, 4.3112, -465.54)
+
+[node name="tree38" parent="Trees" instance=ExtResource("5_k7acu")]
+transform = Transform3D(-0.251934, 0, -0.967744, 0, 1, 0, 0.967744, 0, -0.251934, -238.543, 4, -457.328)
+
 [node name="tree5" parent="Trees" instance=ExtResource("5_k7acu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.514, 4, -467.306)
 
@@ -246,44 +288,53 @@ transform = Transform3D(9, 0, 0, 0, 9, 0, 0, 0, 9, -651.25, 5.67422, -354.61)
 [node name="Structures" type="Node3D" parent="."]
 transform = Transform3D(0.488895, 0, -0.872342, 0, 1, 0, 0.872342, 0, 0.488895, -553.934, 1.05227, -409.905)
 
-[node name="Bridge2" type="CSGBox3D" parent="Structures"]
-transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 3.05176e-05)
-use_collision = true
-size = Vector3(25, 5, 125)
-
-[node name="Bridge3" type="CSGBox3D" parent="Structures"]
-transform = Transform3D(0.50635, 0, 0.862328, 0, 1, 0, -0.862328, 0, 0.50635, -321.302, 0, -339.166)
-use_collision = true
-size = Vector3(25, 5, 125)
-
-[node name="Bridge" type="CSGBox3D" parent="Structures"]
-transform = Transform3D(0.488896, 0, 0.872343, 0, 1, 0, -0.872343, 0, 0.488896, 462.213, 0.10679, -350.113)
-use_collision = true
-size = Vector3(25, 5, 125)
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Structures"]
+[node name="MountainPlatformProto" type="CSGCylinder3D" parent="Structures"]
 transform = Transform3D(1, 0, -3.27826e-07, 0, 1, 0, 3.27826e-07, 0, 1, -108.867, 79.964, -503.815)
 use_collision = true
 radius = 30.0
 sides = 24
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Structures"]
-transform = Transform3D(1, 0, -3.27826e-07, 0, 1, 0, 3.27826e-07, 0, 1, 162.999, 5.7218, -452.325)
+[node name="Bridges" type="Node3D" parent="Structures"]
+
+[node name="ForlornToLighthouseBridge" type="CSGBox3D" parent="Structures/Bridges"]
+transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, 0)
+use_collision = true
+size = Vector3(25, 5, 125)
+
+[node name="LowlandstoForlornBridge" type="CSGBox3D" parent="Structures/Bridges"]
+transform = Transform3D(0.50635, 0, 0.862328, 0, 1, 0, -0.862328, 0, 0.50635, -321.302, 0, -339.166)
+use_collision = true
+size = Vector3(25, 5, 125)
+
+[node name="StarterToForlornBridge" type="CSGBox3D" parent="Structures/Bridges"]
+transform = Transform3D(0.488896, 0, 0.872343, 0, 1, 0, -0.872343, 0, 0.488896, 462.213, 0.10679, -350.113)
+use_collision = true
+size = Vector3(25, 5, 125)
+
+[node name="Buildings" type="Node3D" parent="Structures"]
+
+[node name="ProtoStructure1" type="CSGBox3D" parent="Structures/Buildings"]
+transform = Transform3D(1, 0, -3.8743e-07, 0, 1, 0, 3.8743e-07, 0, 1, 162.999, 5.7218, -452.325)
 use_collision = true
 size = Vector3(17, 6, 7)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Structures"]
+[node name="ProtoStructure2" type="CSGBox3D" parent="Structures/Buildings"]
 transform = Transform3D(-0.225706, 0, -0.891082, 0, 1, 0, 0.643758, 0, -0.31242, 153.423, 5.7603, -477.38)
 use_collision = true
 size = Vector3(17, 6, 7)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Structures"]
+[node name="ProtoStructure3" type="CSGBox3D" parent="Structures/Buildings"]
 transform = Transform3D(0.806784, 0, -0.460924, 0, 1.69036, 0, 0.559353, 0, 0.664815, 173.702, 5.7603, -488.884)
 use_collision = true
 size = Vector3(17, 6, 7)
 
-[node name="campfire2" parent="Structures" instance=ExtResource("8_5v1tr")]
-transform = Transform3D(1, 0, -3.27826e-07, 0, 1, 0, 3.27826e-07, 0, 1, 168.736, 2.95065, -471.695)
+[node name="Campfires" type="Node3D" parent="Structures"]
 
-[node name="player" parent="." instance=ExtResource("1_a02cp")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 4, 0)
+[node name="StarterIslandFire" parent="Structures/Campfires" instance=ExtResource("13_e0ngr")]
+transform = Transform3D(1, 0, -3.27826e-07, 0, 1, 0, 3.27826e-07, 0, 1, 627.128, 2.96497, -285.264)
+
+[node name="ForlornFire1" parent="Structures/Campfires" instance=ExtResource("13_e0ngr")]
+transform = Transform3D(2, 0, -6.55651e-07, 0, 2, 0, 6.55651e-07, 0, 2, 166.979, 2.68622, -472.279)
+
+[node name="Player" parent="." instance=ExtResource("14_e0ngr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)

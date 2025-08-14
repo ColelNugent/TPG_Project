@@ -1,78 +1,142 @@
-[gd_scene load_steps=9 format=3 uid="uid://nbbjg5x6bo2h"]
+[gd_scene load_steps=23 format=3 uid="uid://bphhyapavuiiu"]
 
-[ext_resource type="Script" uid="uid://o7jbj4khrw2p" path="res://Player/player.gd" id="2_4ntmi"]
-[ext_resource type="PackedScene" uid="uid://c7bsvhp0c6epo" path="res://Assets/Characters/player.glb" id="5_k53q1"]
+[ext_resource type="PackedScene" uid="uid://d32vsd10wduxx" path="res://Assets/Characters/Player/ProtoModels/ProtoPlayer.glb" id="1_4ntmi"]
+[ext_resource type="Script" uid="uid://ba8fvkyjam2n7" path="res://Player/player.gd" id="1_gwnis"]
+[ext_resource type="PackedScene" uid="uid://p2saxcs11ydh" path="res://Assets/Weapons/Prototypes/claymoreprototype.glb" id="2_btcbx"]
+[ext_resource type="Script" uid="uid://dt8wxrhm5vv8h" path="res://Player/camera_rig.gd" id="4_fhl08"]
+[ext_resource type="PackedScene" uid="uid://jbvwn4ilwc1p" path="res://UI/InGame/state_debugger_ui.tscn" id="4_k53q1"]
+[ext_resource type="Script" uid="uid://baxbw87y7rqov" path="res://Player/state_machine.gd" id="6_fhl08"]
+[ext_resource type="Script" uid="uid://dkeu64ur2tld4" path="res://Player/States/idle.gd" id="7_vtle1"]
+[ext_resource type="Script" uid="uid://cmicqlqnsroku" path="res://Player/States/walking.gd" id="8_od3ui"]
+[ext_resource type="Script" uid="uid://b7wxhwkykeqmc" path="res://Player/States/sprinting.gd" id="9_00tjw"]
+[ext_resource type="Script" uid="uid://t08l7v7ybv6j" path="res://Player/States/jumping.gd" id="10_x3vf3"]
+[ext_resource type="Script" uid="uid://bh6xfixm5e47m" path="res://Player/States/sprint_jumping.gd" id="11_apopc"]
+[ext_resource type="Script" uid="uid://i44o7m4wes1n" path="res://Player/States/falling.gd" id="12_5htga"]
+[ext_resource type="Script" uid="uid://ciaafu6h5odpt" path="res://Player/States/landing.gd" id="13_p5o4e"]
+[ext_resource type="Script" uid="uid://tft2y1tc5isj" path="res://Player/States/squatting.gd" id="14_gu6f8"]
+[ext_resource type="Script" uid="uid://b0ey7uhtwl544" path="res://Player/States/idle_crouch.gd" id="15_dkpta"]
+[ext_resource type="Script" uid="uid://ckgxfd2qd6kqs" path="res://Player/States/walk_crouch.gd" id="16_lfmf2"]
+[ext_resource type="Script" uid="uid://b4mtak04m5jgp" path="res://Player/States/standup.gd" id="17_pisgm"]
+[ext_resource type="Script" uid="uid://clpbce13ic77y" path="res://Player/States/slash_1.gd" id="18_b1ygp"]
+[ext_resource type="Script" uid="uid://qbbfl8621bjy" path="res://Player/States/slash_2.gd" id="19_o28un"]
+[ext_resource type="Script" uid="uid://dcg5lfuqyxsr1" path="res://Player/States/slash_3.gd" id="20_n471f"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l8h54"]
-radius = 0.65
-height = 6.0
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gwnis"]
+radius = 0.25
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4ntmi"]
-animation = &"idle"
+[sub_resource type="SphereShape3D" id="SphereShape3D_n471f"]
+radius = 0.25
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_btcbx"]
-animation = &"run"
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_gwnis")
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gwnis"]
-animation = &"walk"
+[node name="ProtoPlayer" parent="." instance=ExtResource("1_4ntmi")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_gwnis"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_4ntmi")
-blend_point_0/pos = 0.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_btcbx")
-blend_point_1/pos = 2.0
-blend_point_2/node = SubResource("AnimationNodeAnimation_gwnis")
-blend_point_2/pos = 1.0
-min_space = 0.0
-max_space = 2.0
-blend_mode = 1
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_k53q1"]
-graph_offset = Vector2(-473, -22)
-nodes/BlendSpace1D/node = SubResource("AnimationNodeBlendSpace1D_gwnis")
-nodes/BlendSpace1D/position = Vector2(-20.4974, 131.769)
-node_connections = [&"output", 0, &"BlendSpace1D"]
-
-[node name="player" instance=ExtResource("5_k53q1")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-collision_layer = 2
-script = ExtResource("2_4ntmi")
-
-[node name="Skeleton3D" parent="Armature" index="0"]
+[node name="Armature" parent="ProtoPlayer" index="0"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-bones/0/position = Vector3(-6.41396e-10, 3.4875, 5.57988e-09)
-bones/0/rotation = Quaternion(0.191202, 1.16808e-07, 9.85453e-09, 0.981551)
-bones/2/rotation = Quaternion(-0.0470187, -0.238702, 0.960247, -0.136878)
-bones/3/rotation = Quaternion(0.426428, -0.0914271, -0.0608972, 0.897826)
-bones/4/rotation = Quaternion(-0.0271088, 0.280671, 0.954424, -0.0977927)
-bones/5/rotation = Quaternion(-0.191108, 0.00389427, -0.0990434, 0.976552)
-bones/6/rotation = Quaternion(0.605708, -0.0366904, 0.0136893, 0.794723)
-bones/7/rotation = Quaternion(-0.0111735, 0.161596, 0.976187, 0.144296)
-bones/8/rotation = Quaternion(0.639605, 0.0830943, 0.105725, 0.756851)
-bones/9/rotation = Quaternion(0.0422925, 0.350784, 0.921747, 0.159823)
-bones/10/rotation = Quaternion(-0.65096, -0.0554126, 0.260506, 0.710857)
-bones/11/rotation = Quaternion(0.716057, 0.0134652, -0.0860361, 0.692589)
-bones/12/position = Vector3(0.272566, 1.92316, 2.14487)
-bones/12/rotation = Quaternion(-0.0470002, 0.705543, 0.705543, -0.0470002)
-bones/13/position = Vector3(0.594584, 0.387174, -0.009119)
-bones/13/rotation = Quaternion(0.015515, -0.725304, 0.68806, -0.0163548)
-bones/14/position = Vector3(-0.279542, 1.92316, 2.14487)
-bones/15/position = Vector3(-0.594584, 1.43076, -0.859185)
-bones/15/rotation = Quaternion(-0.00961057, -0.904343, 0.42621, 0.0203919)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-shape = SubResource("CapsuleShape3D_l8h54")
+[node name="Skeleton3D" parent="ProtoPlayer/Armature" index="0"]
+bones/0/position = Vector3(0, 2.67994, 1.66011e-08)
+bones/0/rotation = Quaternion(-0.0348362, 0, 0, 0.999393)
+bones/1/rotation = Quaternion(0.109326, 0, 0, 0.994006)
+bones/2/rotation = Quaternion(-0.193598, 1.16954e-07, -2.30787e-08, 0.981081)
+bones/3/rotation = Quaternion(-0.0315429, -1.1915e-07, -3.76021e-09, 0.999502)
+bones/4/position = Vector3(-0.601331, 0.963906, 0.137439)
+bones/4/rotation = Quaternion(-0.0128307, 0.0876834, 0.972487, 0.215443)
+bones/5/rotation = Quaternion(-0.154768, -0.00426719, 0.0339439, 0.987358)
+bones/6/rotation = Quaternion(-0.0130474, -0.0280957, 0.0929153, 0.995192)
+bones/7/position = Vector3(0.601331, 0.963906, 0.137439)
+bones/7/rotation = Quaternion(0.0128307, 0.0876834, 0.972487, -0.215443)
+bones/8/rotation = Quaternion(-0.154768, 0.00426719, -0.0339439, 0.987358)
+bones/9/rotation = Quaternion(-0.0130474, 0.0280957, -0.0929153, 0.995192)
+bones/10/rotation = Quaternion(0.0117782, -0.0556905, 0.997012, 0.0522213)
+bones/10/scale = Vector3(1.00001, 1, 1.00002)
+bones/11/rotation = Quaternion(0.0761327, 0.000855605, 0.0245455, 0.996795)
+bones/12/rotation = Quaternion(-0.645646, -0.0197009, 0.048957, 0.761811)
+bones/12/scale = Vector3(1.00001, 1, 1)
+bones/13/rotation = Quaternion(-0.0117782, -0.05569, 0.997012, -0.0522227)
+bones/13/scale = Vector3(1.00001, 1, 1.00002)
+bones/14/rotation = Quaternion(0.0761315, -0.000855391, -0.0245479, 0.996795)
+bones/14/scale = Vector3(1, 1, 1)
+bones/15/rotation = Quaternion(-0.645645, 0.0197002, -0.0489563, 0.761812)
+bones/15/scale = Vector3(1.00001, 1, 1)
 
-[node name="SpringArmPivot" type="Node3D" parent="." index="3"]
+[node name="BackAttachment" type="BoneAttachment3D" parent="ProtoPlayer/Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.98886, -0.148848, 0, 0.148848, 0.98886, 0, 3.59194, -0.0636571)
+bone_name = "upperbody"
+bone_idx = 1
 
-[node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.42332, 0)
-spring_length = 3.0
+[node name="claymoreprototype" parent="ProtoPlayer/Armature/Skeleton3D/BackAttachment" instance=ExtResource("2_btcbx")]
+transform = Transform3D(0.866025, -0.5, 8.64398e-08, -0.494378, -0.856288, -0.149535, 0.0747678, 0.129501, -0.988756, 0.041, 0.892, 0.544)
 
-[node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D" index="0"]
+[node name="HandAttachment" type="BoneAttachment3D" parent="ProtoPlayer/Armature/Skeleton3D" index="2"]
+transform = Transform3D(-0.985211, 0.163343, 0.051739, -0.171341, -0.939222, -0.297496, 4.61936e-07, -0.301962, 0.95332, 1.29601, 2.87068, -0.0424388)
+visible = false
+bone_name = "hand.r"
+bone_idx = 9
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
-tree_root = SubResource("AnimationNodeBlendTree_k53q1")
-anim_player = NodePath("../AnimationPlayer")
-parameters/BlendSpace1D/blend_position = 0
+[node name="claymoreprototype" parent="ProtoPlayer/Armature/Skeleton3D/HandAttachment" instance=ExtResource("2_btcbx")]
+transform = Transform3D(-0.161604, 5.07753e-08, -0.986856, 0.986856, -4.31368e-08, -0.161604, -5.07753e-08, -1, -4.31368e-08, 0, 0.278, -0.762)
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_gwnis")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.259, 0)
+shape = SubResource("SphereShape3D_n471f")
+spring_length = 5.0
+script = ExtResource("4_fhl08")
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.626)
+
+[node name="StateDebuggerUI" parent="." instance=ExtResource("4_k53q1")]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("6_fhl08")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("7_vtle1")
+
+[node name="Walking" type="Node" parent="StateMachine"]
+script = ExtResource("8_od3ui")
+
+[node name="Sprinting" type="Node" parent="StateMachine"]
+script = ExtResource("9_00tjw")
+
+[node name="Jumping" type="Node" parent="StateMachine"]
+script = ExtResource("10_x3vf3")
+
+[node name="Sprint_Jumping" type="Node" parent="StateMachine"]
+script = ExtResource("11_apopc")
+
+[node name="Falling" type="Node" parent="StateMachine"]
+script = ExtResource("12_5htga")
+
+[node name="Landing" type="Node" parent="StateMachine"]
+script = ExtResource("13_p5o4e")
+
+[node name="Squatting" type="Node" parent="StateMachine"]
+script = ExtResource("14_gu6f8")
+
+[node name="Idle_Crouch" type="Node" parent="StateMachine"]
+script = ExtResource("15_dkpta")
+
+[node name="Walk_Crouch" type="Node" parent="StateMachine"]
+script = ExtResource("16_lfmf2")
+
+[node name="Standup" type="Node" parent="StateMachine"]
+script = ExtResource("17_pisgm")
+
+[node name="Slash_1" type="Node" parent="StateMachine"]
+script = ExtResource("18_b1ygp")
+
+[node name="Slash_2" type="Node" parent="StateMachine"]
+script = ExtResource("19_o28un")
+
+[node name="Slash_3" type="Node" parent="StateMachine"]
+script = ExtResource("20_n471f")
+
+[editable path="ProtoPlayer"]
